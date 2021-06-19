@@ -8,8 +8,8 @@
 [submodule "linux"]
 	path = linux
 	url = https://github.com/MicroPhase/linux
-	branch = 2018_R1
+	branch = 2019_R2
 [submodule "hdl"]
 	path = hdl
 	url = https://github.com/MicroPhase/hdl
-	branch = hdl_2018_r1
+	branch = hdl_2019_r2
