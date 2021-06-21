@@ -12,4 +12,4 @@
 [submodule "hdl"]
 	path = hdl
 	url = https://github.com/MicroPhase/hdl
-	branch = hdl_2019_r2
+	branch = antsdr
