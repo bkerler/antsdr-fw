@@ -23,7 +23,7 @@ VSUBDIRS = hdl buildroot linux u-boot-xlnx
 
 VERSION=$(shell git describe --abbrev=4 --dirty --always --tags)
 LATEST_TAG=$(shell git describe --abbrev=0 --tags)
-UBOOT_VERSION=$(shell echo -n "PlutoSDR " && cd u-boot-xlnx && git describe --abbrev=0 --dirty --always --tags)
+UBOOT_VERSION=$(shell echo -n "ANTSDR " && cd u-boot-xlnx && git describe --abbrev=0 --dirty --always --tags)
 HAVE_VIVADO= $(shell bash -c "source $(VIVADO_SETTINGS) > /dev/null 2>&1 && vivado -version > /dev/null 2>&1 && echo 1 || echo 0")
 
 ifeq (1, ${HAVE_VIVADO})
@@ -37,8 +37,8 @@ $(error "      3] export VIVADO_VERSION=v20xx.x")
 	endif
 endif
 
-TARGET ?= pluto
-SUPPORTED_TARGETS:=pluto sidekiqz2
+TARGET ?= ant
+SUPPORTED_TARGETS:=pluto sidekiqz2 ant
 
 # Include target specific constants
 include scripts/$(TARGET).mk
@@ -58,7 +58,7 @@ endif
 
 ifeq ($(findstring $(TARGET),$(SUPPORTED_TARGETS)),)
 all:
-	@echo "Invalid `TARGET variable ; valid values are: pluto, sidekiqz2" &&
+	@echo "Invalid `TARGET variable ; valid values are: pluto, sidekiqz2,ant" &&
 	exit 1
 else
 all: clean-build $(TARGETS) zip-all legal-info
@@ -105,7 +105,7 @@ build/zImage: linux/arch/arm/boot/zImage  | build
 
 ### Device Tree ###
 
-linux/arch/arm/boot/dts/%.dtb: linux/arch/arm/boot/dts/%.dts  linux/arch/arm/boot/dts/zynq-pluto-sdr.dtsi
+linux/arch/arm/boot/dts/%.dtb: linux/arch/arm/boot/dts/%.dts  linux/arch/arm/boot/dts/zynq-ant-sdr.dtsi
 	make -C linux -j $(NCORES) ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) $(notdir $@)
 
 build/%.dtb: linux/arch/arm/boot/dts/%.dtb | build
@@ -134,10 +134,10 @@ build/system_top.hdf:  | build
 ifeq (1, ${HAVE_VIVADO})
 	bash -c "source $(VIVADO_SETTINGS) && make -C hdl/projects/$(TARGET) && cp hdl/projects/$(TARGET)/$(TARGET).sdk/system_top.hdf $@"
 	unzip -l $@ | grep -q ps7_init || cp hdl/projects/$(TARGET)/$(TARGET).srcs/sources_1/bd/system/ip/system_sys_ps7_0/ps7_init* build/
-else ifneq ($(HDF_FILE),)
-	cp $(HDF_FILE) $@
-else ifneq ($(HDF_URL),)
+else
+ifneq ($(HDF_URL),)
 	wget -T 3 -t 1 -N --directory-prefix build $(HDF_URL)
+endif
 endif
 
 ### TODO: Build system_top.hdf from src if dl fails - need 2016.2 for that ...
