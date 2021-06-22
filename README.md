@@ -3,8 +3,9 @@ ANTSDR Firmware for the [ANTSDR]("https://item.taobao.com/item.htm?spm=a230r.1.1
 This project is a fork of ADI  [ADALM-PLUTO ](https://github.com/analogdevicesinc/plutosdr-fw)
 
 ![ANTSDR](./images/ANTSDR.png)
-* Build Instructions
-The ANTSDR Firmware is build with the [Xilinx Vivado 2019.1](https://www.xilinx.com/member/forms/download/xef-vivado.html?filename=Xilinx_Vivado_SDK_Web_2019.1_0524_1430_Lin64.bin). You need to install the correct Vivado  Version in your linux PC,  and then, you can  follow the instructions below to Generate the firmware for [ANTSDR B220]("https://item.taobao.com/item.htm?spm=a230r.1.14.16.34e21142YIlxqx&id=647986963313&ns=1&abbucket=2#detail").
+## Build Instructions
+
+The ANTSDR Firmware is built with the [Xilinx Vivado 2019.1](https://www.xilinx.com/member/forms/download/xef-vivado.html?filename=Xilinx_Vivado_SDK_Web_2019.1_0524_1430_Lin64.bin). You need to install the correct Vivado  Version in your linux PC,  and then, you can  follow the instructions below to Generate the firmware for [ANTSDR B220]("https://item.taobao.com/item.htm?spm=a230r.1.14.16.34e21142YIlxqx&id=647986963313&ns=1&abbucket=2#detail").
 ```bash
  sudo apt-get install git build-essential fakeroot libncurses5-dev libssl-dev ccache
  sudo apt-get install dfu-util u-boot-tools device-tree-compiler libssl1.0-dev mtools
@@ -17,7 +18,7 @@ The ANTSDR Firmware is build with the [Xilinx Vivado 2019.1](https://www.xilinx.
  make
 
 ```
-* Build Artifacts
+## Build Artifacts
  ```bash
       michael@HAL9000:~/devel/ansdr-fw$ ls -AGhl build
       total 372M
@@ -54,7 +55,7 @@ The ANTSDR Firmware is build with the [Xilinx Vivado 2019.1](https://www.xilinx.
       -rw-rw-r-- 1 michael  19K Apr 14 11:00 zynq-ant-sdr-revc.dtb
  ```
  
- * Main targets
+## Main targets
  
      | File  | Comment |
      | ------------- | ------------- | 
@@ -66,7 +67,7 @@ The ANTSDR Firmware is build with the [Xilinx Vivado 2019.1](https://www.xilinx.
      | antsdr-fw-vX.XX.zip  | ZIP archive containg all of the files above |  
      | antsdr-jtag-bootstrap-vX.XX.zip  | ZIP archive containg u-boot and Vivao TCL used for JATG bootstrapping |       
  
-  * Other intermediate targets
+##  Other intermediate targets
 
      | File  | Comment |
      | ------------- | ------------- |
