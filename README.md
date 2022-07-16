@@ -49,4 +49,3 @@ drwxrwxr-x 6 wcc 4,0K   4月14日 11:01 sdk
 -rw-rw-r-- 1 wcc 19K    4月14日 11:00 zynq-ant-sdr-revb.dtb 
 -rw-rw-r-- 1 wcc 19K    4月14日 11:00 zynq-ant-sdr-revc.dtb
  ```
-
